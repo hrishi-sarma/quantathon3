@@ -256,9 +256,9 @@ function useInView(options = {}): [React.RefObject<HTMLElement | null>, boolean]
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 9,
-    hours: 9,
-    minutes: 0,
+    days: 8,
+    hours: 15,
+    minutes: 15,
     seconds: 0,
   });
 
@@ -306,6 +306,50 @@ function Countdown() {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+// QR Code Component with Minimize functionality
+function QRCodeWidget() {
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  return (
+    <div 
+      className={`fixed bottom-6 right-6 z-50 transition-all duration-300 ${
+        isMinimized ? 'w-16 h-16' : 'w-64'
+      }`}
+    >
+      {!isMinimized ? (
+        <div className="backdrop-blur-xl bg-black/60 border border-white/20 p-4 rounded-lg shadow-[0_0_30px_rgba(0,255,136,0.3)]">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider">Register Now</h3>
+            <button
+              onClick={() => setIsMinimized(true)}
+              className="text-gray-400 hover:text-white transition-colors text-xl leading-none"
+              aria-label="Minimize QR code"
+            >
+              −
+            </button>
+          </div>
+          <div className="bg-white p-3 rounded">
+            <img 
+              src="/q3qr.jpeg" 
+              alt="Registration QR Code" 
+              className="w-full h-auto"
+            />
+          </div>
+          <p className="text-xs text-gray-400 mt-3 text-center">Scan to register</p>
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsMinimized(false)}
+          className="w-16 h-16 backdrop-blur-xl bg-black/60 border border-white/20 rounded-lg shadow-[0_0_30px_rgba(0,255,136,0.3)] hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+          aria-label="Expand QR code"
+        >
+          <div className="text-2xl font-bold text-green-400 group-hover:rotate-180 transition-transform duration-300">⟐</div>
+        </button>
+      )}
     </div>
   );
 }
@@ -461,18 +505,18 @@ export default function Home() {
   ];
 
   const timeline = [
-    { date: "5th February 2025", event: "Last Date for Registration", time: "", icon: "📅" },
-    { date: "8th February 2025", event: "Quantization Begins", time: "10:00 AM", icon: "🚀" },
-    { date: "9th February 2025", event: "Final Presentations", time: "Throughout the day", icon: "🎤" },
-    { date: "9th February 2025", event: "Winner Announcement", time: "Evening", icon: "🏆" },
+    { date: "5th February 2025", event: "Last Date for Registration", time: "", icon: "⟡" },
+    { date: "8th February 2025", event: "Quantization Begins", time: "10:00 AM", icon: "⟢" },
+    { date: "9th February 2025", event: "Final Presentations", time: "Throughout the day", icon: "◬" },
+    { date: "9th February 2025", event: "Winner Announcement", time: "Evening", icon: "◈" },
   ];
 
   const whyParticipate = [
-    { icon: "🧠", title: "Learn from Experts", desc: "Hands-on mentorship from quantum computing professionals" },
-    { icon: "🤝", title: "Network", desc: "Connect with like-minded quantum enthusiasts and industry leaders" },
-    { icon: "💡", title: "Innovation", desc: "Work on cutting-edge quantum computing challenges" },
-    { icon: "🎁", title: "Prizes & Perks", desc: "Win exciting prizes and exclusive swag from sponsors" },
-    { icon: "👥", title: "Learn Together", desc: "Collaborative learning through peer discussions, guided sessions, and shared problem-solving" },
+    { icon: "◬", title: "Learn from Experts", desc: "Hands-on mentorship from quantum computing professionals" },
+    { icon: "◊", title: "Network", desc: "Connect with like-minded quantum enthusiasts and industry leaders" },
+    { icon: "◈", title: "Innovation", desc: "Work on cutting-edge quantum computing challenges" },
+    { icon: "◆", title: "Prizes & Perks", desc: "Win exciting prizes and exclusive swag from sponsors" },
+    { icon: "◉", title: "Learn Together", desc: "Collaborative learning through peer discussions, guided sessions, and shared problem-solving" },
   ];
 
   const judgingCriteria = [
@@ -524,6 +568,7 @@ export default function Home() {
       
       <GridBackground />
       <FloatingParticles />
+      <QRCodeWidget />
 
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/30 border-b border-white/10" style={{
         background: 'rgba(0, 0, 0, 0.3)',
@@ -646,21 +691,21 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mb-32">
             {[
               { 
-                icon: "🧠", 
+                icon: "◬", 
                 title: "Quantum Intelligence", 
                 subtitle: "(Quantum ML)",
                 desc: "Fuse quantum computing with machine learning to design next-generation intelligent systems. Explore quantum neural networks, variational quantum algorithms, and hybrid quantum-classical models that push the limits of AI performance, optimization, and data representation.", 
                 gradient: "from-purple-400 to-pink-500" 
               },
               { 
-                icon: "📡", 
+                icon: "◉", 
                 title: "Quantum Communication", 
                 subtitle: "& Cryptography",
                 desc: "Engineer the future of secure communication using quantum principles. Explore quantum key distribution (QKD), entanglement-based protocols, and post-quantum security models to design robust, tamper-resistant communication systems for real-world deployment.", 
                 gradient: "from-blue-400 to-indigo-500" 
               },
               { 
-                icon: "⚙️", 
+                icon: "⬡", 
                 title: "Quantum Optimization", 
                 subtitle: "& Error Mitigation",
                 desc: "Focus on making quantum algorithms practical and scalable on noisy intermediate-scale quantum (NISQ) devices. Explore quantum optimization algorithms (VQE, QAOA), noise modeling, error mitigation techniques, and hardware-aware circuit optimization to improve performance under real-world constraints.", 
