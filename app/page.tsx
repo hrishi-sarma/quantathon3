@@ -256,8 +256,8 @@ function useInView(options = {}): [React.RefObject<HTMLElement | null>, boolean]
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 15,
-    hours: 0,
+    days: 9,
+    hours: 9,
     minutes: 0,
     seconds: 0,
   });
@@ -472,6 +472,7 @@ export default function Home() {
     { icon: "🤝", title: "Network", desc: "Connect with like-minded quantum enthusiasts and industry leaders" },
     { icon: "💡", title: "Innovation", desc: "Work on cutting-edge quantum computing challenges" },
     { icon: "🎁", title: "Prizes & Perks", desc: "Win exciting prizes and exclusive swag from sponsors" },
+    { icon: "👥", title: "Learn Together", desc: "Collaborative learning through peer discussions, guided sessions, and shared problem-solving" },
   ];
 
   const judgingCriteria = [
@@ -597,7 +598,7 @@ export default function Home() {
           <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-20 tracking-tight bg-gradient-to-r from-white via-green-100 to-cyan-100 bg-clip-text text-transparent transition-all duration-1000 ${whyInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             Why Participate?
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
             {whyParticipate.map((item, idx) => (
               <div key={idx} className={`border border-white/20 p-8 hover:border-green-400/50 transition-all duration-500 backdrop-blur-md bg-white/5 group hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] ${whyInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: `${idx * 100}ms` }}>
                 <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
@@ -644,15 +645,34 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-8 mb-32">
             {[
-              { icon: "🧠", title: "Quantum ML", desc: "Combine quantum computing with machine learning. Explore quantum neural networks, variational quantum algorithms, and how quantum systems can enhance AI capabilities.", gradient: "from-purple-400 to-pink-500" },
-              { icon: "⚛", title: "Quantum Core", desc: "Explore fundamental quantum computing concepts, quantum mechanics, algorithms like Shor and Grover, and quantum hardware with programming languages and simulators.", gradient: "from-green-400 to-cyan-500" },
-              { icon: "📡", title: "Quantum Communication", desc: "Dive into quantum cryptography, quantum key distribution, and secure communication protocols. Build solutions leveraging quantum entanglement for next-gen security.", gradient: "from-blue-400 to-indigo-500" },
+              { 
+                icon: "🧠", 
+                title: "Quantum Intelligence", 
+                subtitle: "(Quantum ML)",
+                desc: "Fuse quantum computing with machine learning to design next-generation intelligent systems. Explore quantum neural networks, variational quantum algorithms, and hybrid quantum-classical models that push the limits of AI performance, optimization, and data representation.", 
+                gradient: "from-purple-400 to-pink-500" 
+              },
+              { 
+                icon: "📡", 
+                title: "Quantum Communication", 
+                subtitle: "& Cryptography",
+                desc: "Engineer the future of secure communication using quantum principles. Explore quantum key distribution (QKD), entanglement-based protocols, and post-quantum security models to design robust, tamper-resistant communication systems for real-world deployment.", 
+                gradient: "from-blue-400 to-indigo-500" 
+              },
+              { 
+                icon: "⚙️", 
+                title: "Quantum Optimization", 
+                subtitle: "& Error Mitigation",
+                desc: "Focus on making quantum algorithms practical and scalable on noisy intermediate-scale quantum (NISQ) devices. Explore quantum optimization algorithms (VQE, QAOA), noise modeling, error mitigation techniques, and hardware-aware circuit optimization to improve performance under real-world constraints.", 
+                gradient: "from-green-400 to-cyan-500" 
+              },
             ].map((track, idx) => (
               <div key={idx} className={`border border-white/20 p-8 hover:border-white/30 transition-all duration-500 backdrop-blur-md bg-white/5 group hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] ${tracksInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: `${idx * 150}ms` }}>
                 <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${track.gradient} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}>
                   <span className="text-2xl">{track.icon}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 tracking-tight">{track.title}</h3>
+                <h3 className="text-2xl font-bold mb-1 tracking-tight">{track.title}</h3>
+                <p className="text-sm text-gray-400 mb-4 font-bold">{track.subtitle}</p>
                 <p className="text-base text-gray-300 leading-relaxed">{track.desc}</p>
               </div>
             ))}
@@ -703,58 +723,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* <section ref={sponsorsRef} id="sponsors" className="py-32 px-6 lg:px-12 relative">
-        <div className="absolute inset-0 backdrop-blur-xl bg-black/40 border-y border-white/10" style={{
-          background: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        }} />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-20 tracking-tight bg-gradient-to-r from-white via-green-100 to-cyan-100 bg-clip-text text-transparent transition-all duration-1000 ${sponsorsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            Our Sponsors
-          </h2>
-          
-          {Object.entries(sponsors).map(([tier, companies], tierIdx) => (
-            <div key={tier} className="mb-20 last:mb-0">
-              <h3 className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-10 font-bold">
-                {tier}
-              </h3>
-              <div className={`grid gap-6 ${tier === 'silver' ? 'max-w-md' : 'md:grid-cols-3'}`}>
-                {companies.map((company, idx) => (
-                  <div key={idx} className={`border border-white/20 p-12 hover:border-white/30 transition-all duration-500 backdrop-blur-md bg-white/5 group hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] ${sponsorsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: `${tierIdx * 300 + idx * 100}ms` }}>
-                    <h4 className="text-lg font-bold text-center group-hover:text-green-400 transition-colors">{company}</h4>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
-      {/* <section ref={guestsRef} className="py-32 px-6 lg:px-12 relative">
-        <div className="absolute inset-0 backdrop-blur-xl bg-black/40 border-y border-white/10" style={{
-          background: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        }} />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-20 tracking-tight bg-gradient-to-r from-white via-green-100 to-cyan-100 bg-clip-text text-transparent transition-all duration-1000 ${guestsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            Chief Guests
-          </h2>
-          <div className="space-y-16">
-            {chiefGuests.map((guest, idx) => (
-              <div key={idx} className={`border-l-2 border-white/30 pl-8 hover:border-green-400/70 transition-all duration-500 backdrop-blur-md bg-white/5 p-6 -ml-6 group hover:scale-[1.02] ${guestsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`} style={{ transitionDelay: `${idx * 150}ms` }}>
-                <h3 className="text-2xl font-bold mb-2 group-hover:text-green-400 transition-colors">{guest.name}</h3>
-                <p className="text-sm text-green-400 mb-6 font-bold tracking-wide">{guest.role}</p>
-                <p className="text-base text-gray-300 leading-relaxed max-w-3xl">
-                  {guest.bio}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       <section ref={timelineRef} id="timeline" className="py-32 px-6 lg:px-12 relative">
         <div className="absolute inset-0 backdrop-blur-xl bg-black/40 border-y border-white/10" style={{

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Quantathon 2.0 × IBM Qiskit FallFest",
+  title: "Quantathon 3.0",
   description: "A quantum computing hackathon by SRM Quantum Computing Club",
 };
 
