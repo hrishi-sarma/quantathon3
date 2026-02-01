@@ -256,9 +256,9 @@ function useInView(options = {}): [React.RefObject<HTMLElement | null>, boolean]
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 8,
-    hours: 15,
-    minutes: 15,
+    days: 5,
+    hours: 9,
+    minutes: 10,
     seconds: 0,
   });
 
@@ -483,9 +483,8 @@ export default function Home() {
   const faqs = [
     { q: "Who can participate?", a: "All students passionate about quantum computing are welcome to participate, regardless of their experience level." },
     { q: "What's the focus of the hackathon's project themes?", a: "Projects focus on quantum algorithms, quantum machine learning, quantum cryptography, and real-world quantum computing applications." },
-    { q: "Is the hackathon virtual or in-person?", a: "This is an in-person event held at TP-1 Turing Hall (8th Floor), SRM University campus." },
+    { q: "Is the hackathon virtual or in-person?", a: "The first 2 rounds are online and the final round will be offline in person evaluation" },
     { q: "What should I bring?", a: "Bring your laptop, charger, enthusiasm, and creativity! All other materials will be provided." },
-    { q: "Will food and drinks be provided?", a: "Yes, meals and refreshments will be provided throughout the hackathon." },
     { q: "How do I form or join a team?", a: "You can form teams of up to 4 members. Solo participation is also welcome, and we'll help you find teammates." },
     { q: "How do I register for the hackathon? Is there a fee?", a: "Registration is free! Simply fill out the registration form on our website." },
     { q: "What if I can't code?", a: "No problem! We welcome participants from all backgrounds. Our mentors will guide you through the basics." },
@@ -505,10 +504,10 @@ export default function Home() {
   ];
 
   const timeline = [
-    { date: "5th February 2025", event: "Last Date for Registration", time: "", icon: "⟡" },
-    { date: "8th February 2025", event: "Quantization Begins", time: "10:00 AM", icon: "⟢" },
-    { date: "9th February 2025", event: "Final Presentations", time: "Throughout the day", icon: "◬" },
-    { date: "9th February 2025", event: "Winner Announcement", time: "Evening", icon: "◈" },
+    { date: "7th February 2025", event: "Registration Deadline", time: "12:00 AM IST", icon: "⟡" },
+    { date: "7th February 2025", event: "PPT Submission", time: "11:59 PM IST", icon: "⟢" },
+    { date: "8th February 2025", event: "Demo Video Submission", time: "11:59 PM IST", icon: "◬" },
+    { date: "9th February 2025", event: "Offline Evaluation (Finale)", time: "08:00 AM IST", icon: "◈" },
   ];
 
   const whyParticipate = [
@@ -610,7 +609,7 @@ export default function Home() {
 
           <div className="mb-12 space-y-4">
             <p className="text-xl md:text-2xl text-green-400 font-bold tracking-wide">
-              8-9 FEBRUARY 2025
+              7-9 FEBRUARY 2025
             </p>
             <p className="text-lg md:text-xl text-gray-400 tracking-wide">
               TP-1 TURING HALL (8TH FLOOR)
@@ -619,13 +618,26 @@ export default function Home() {
 
           <Countdown />
 
-          <button onClick={createRipple} className="group relative px-10 py-4 border border-white/20 hover:border-white/40 text-sm uppercase tracking-[0.2em] font-bold overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(0,255,136,0.3)]">
-            <span className="relative z-10">Register Now</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-cyan-400/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            {ripples.map((ripple) => (
-              <span key={ripple.id} className="absolute bg-white/30 rounded-full animate-ripple" style={{ left: ripple.x, top: ripple.y, width: 0, height: 0 }} />
-            ))}
-          </button>
+          <button
+              onClick={(e) => {
+                createRipple(e);
+                window.open(
+                  "https://unstop.com/hackathons/quantathon-20-srm-institute-of-science-and-technology-kattankulathur-chennai-1631878",
+                  "_blank"
+                );
+              }}
+              className="group relative px-10 py-4 border border-white/20 hover:border-white/40 text-sm uppercase tracking-[0.2em] font-bold overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(0,255,136,0.3)]"
+            >
+              <span className="relative z-10">Register Now</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-cyan-400/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              {ripples.map((ripple) => (
+                <span
+                  key={ripple.id}
+                  className="absolute bg-white/30 rounded-full animate-ripple"
+                  style={{ left: ripple.x, top: ripple.y, width: 0, height: 0 }}
+                />
+              ))}
+            </button>
         </div>
 
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
@@ -838,12 +850,11 @@ export default function Home() {
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         }} />
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-16 mb-16">
+          <div className="grid md:grid-cols-3 gap-16 mb-16">
             <div>
               <h4 className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-6 font-bold">Contact</h4>
               <div className="space-y-2 text-sm text-gray-300">
                 <p>srmqcc@gmail.com</p>
-                <p>+91 7995738255</p>
                 <p>+91 8011922099</p>
               </div>
             </div>
@@ -856,9 +867,34 @@ export default function Home() {
                 <a href="#timeline" className="block text-gray-300 hover:text-white transition-colors">Timeline</a>
               </div>
             </div>
+            <div>
+              <h4 className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-6 font-bold">Follow Us</h4>
+              <div className="flex gap-4">
+                <a 
+                  href="https://www.linkedin.com/search/results/all/?keywords=quantum%20computing%20club%20srm&origin=RICH_QUERY_SUGGESTION&spellCorrectionEnabled=false&heroEntityKey=urn%3Ali%3Aorganization%3A88280804&position=0" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-white/20 rounded-lg flex items-center justify-center hover:border-cyan-400/50 hover:bg-cyan-400/10 transition-all group"
+                >
+                  <svg className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+                <a 
+                  href="https://www.instagram.com/quantum_srm/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-white/20 rounded-lg flex items-center justify-center hover:border-pink-400/50 hover:bg-pink-400/10 transition-all group"
+                >
+                  <svg className="w-5 h-5 text-gray-400 group-hover:text-pink-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
           <div className="text-xs text-gray-600 font-bold">
-            © 2025 Quantum Computing Club SRM
+            © 2026 Quantum Computing Club SRM
           </div>
         </div>
       </footer>
