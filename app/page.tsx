@@ -256,9 +256,9 @@ function useInView(options = {}): [React.RefObject<HTMLElement | null>, boolean]
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 5,
-    hours: 9,
-    minutes: 10,
+    days: 1,
+    hours: 4,
+    minutes: 57,
     seconds: 0,
   });
 
@@ -491,11 +491,7 @@ export default function Home() {
     { q: "Is there a code of conduct?", a: "Yes, we maintain a respectful and inclusive environment. All participants must follow our code of conduct." },
   ];
 
-  const sponsors = {
-    platinum: ["Kwantum Research Labs", "Quentangle"],
-    gold: ["Devfolio", "Polygon", "ETH"],
-    silver: ["Replit"],
-  };
+  const sponsors = ["QNu Labs", "Anutanthra", "Taqbit Labs", "Quentangle", "KwantumG"];
 
   const chiefGuests = [
     { name: "Jagan Narayan Natarajan", role: "IBM Research Labs", bio: "Master's in Opto Electronics from IIT Delhi and Physics from IIT Madras. Mainframe developer and architect at IBM, now in quantum support team." },
@@ -525,6 +521,34 @@ export default function Home() {
     { title: "Presentation", weight: "15%", desc: "Clarity and effectiveness of project demonstration" },
   ];
 
+  const industrialProblems = [
+    {
+      title: "Quantum Correlations & QKD Security",
+      desc: "Design and simulate a framework to quantify and preserve quantum correlations in two-qubit, multi-qubit, or qubit–qudit systems subjected to amplitude damping and other typical noise channels. Simulate a prepare-and-measure QKD protocol and analyse how channel noise and losses affect key generation rate and security.",
+      icon: "◬"
+    },
+    {
+      title: "Quantum Approximate Optimization for Graph Partitioning",
+      desc: "Apply QAOA to solve graph partitioning problems, exploring its effectiveness in dividing networks into balanced subsets while minimizing edge cuts.",
+      icon: "◉"
+    },
+    {
+      title: "Hybrid Quantum-Classical Neural Network for Image Recognition",
+      desc: "Develop a hybrid quantum-classical framework that combines quantum computing with classical neural networks to enhance image recognition capabilities.",
+      icon: "◈"
+    },
+    {
+      title: "Traveling Salesman Problem with QAOA",
+      desc: "Implement QAOA to optimize solutions for the classic traveling salesman problem, demonstrating quantum advantage in combinatorial optimization.",
+      icon: "⬡"
+    },
+    {
+      title: "QGNN-based Manufacturing Optimization",
+      desc: "Develop a QGNN-based hybrid quantum–classical framework for optimizing job scheduling and production routing in manufacturing systems under multiple operational constraints.",
+      icon: "◆"
+    }
+  ];
+
   const [aboutRef, aboutInView] = useInView();
   const [tracksRef, tracksInView] = useInView();
   const [whyRef, whyInView] = useInView();
@@ -533,6 +557,7 @@ export default function Home() {
   const [criteriaRef, criteriaInView] = useInView();
   const [timelineRef, timelineInView] = useInView();
   const [faqRef, faqInView] = useInView();
+  const [problemsRef, problemsInView] = useInView();
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-x-hidden" style={{ fontFamily: "'Courier New', Courier, monospace" }}>
@@ -581,7 +606,7 @@ export default function Home() {
               <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-cyan-400 group-hover:w-full transition-all duration-300" />
             </div>
             <div className="hidden md:flex items-center gap-12 text-sm">
-              {["About", "Tracks", "Gallery", "Timeline", "FAQ"].map((item) => (
+              {["About", "Tracks", "Problems", "Gallery", "Timeline", "FAQ"].map((item) => (
                 <a key={item} href={`#${item.toLowerCase()}`} className="relative text-gray-400 hover:text-white transition-colors group">
                   {item}
                   <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-cyan-400 group-hover:w-full transition-all duration-300" />
@@ -754,6 +779,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Industrial Problems Section */}
+      <section ref={problemsRef} id="problems" className="py-32 px-6 lg:px-12 relative">
+        <div className="absolute inset-0 backdrop-blur-xl bg-black/40 border-y border-white/10" style={{
+          background: 'rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        }} />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight bg-gradient-to-r from-white via-green-100 to-cyan-100 bg-clip-text text-transparent transition-all duration-1000 ${problemsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            Industrial Problems
+          </h2>
+          <p className={`text-lg text-cyan-400 mb-20 font-bold uppercase tracking-wider transition-all duration-1000 delay-100 ${problemsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            (RECOMMENDED)
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {industrialProblems.map((problem, idx) => (
+              <div 
+                key={idx} 
+                className={`border border-white/20 p-8 hover:border-cyan-400/50 transition-all duration-500 backdrop-blur-md bg-white/5 group hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] ${problemsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${idx * 100}ms` }}
+              >
+                <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{problem.icon}</div>
+                <h3 className="text-xl font-bold mb-4 group-hover:text-cyan-400 transition-colors">{problem.title}</h3>
+                <p className="text-sm text-gray-300 leading-relaxed">{problem.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Gallery Section */}
       <Gallery />
 
@@ -777,6 +833,30 @@ export default function Home() {
                 <p className="text-gray-300">{criterion.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sponsors Section */}
+      <section ref={sponsorsRef} className="py-32 px-6 lg:px-12 relative">
+        <div className="absolute inset-0 backdrop-blur-xl bg-black/40 border-y border-white/10" style={{
+          background: 'rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        }} />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-20 tracking-tight bg-gradient-to-r from-white via-green-100 to-cyan-100 bg-clip-text text-transparent transition-all duration-1000 ${sponsorsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            Our Sponsors
+          </h2>
+
+          <div className={`transition-all duration-1000 delay-200 ${sponsorsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+              {sponsors.map((sponsor, idx) => (
+                <div key={idx} className="border border-white/20 p-8 hover:border-cyan-400/50 transition-all duration-500 backdrop-blur-md bg-white/5 group hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] flex items-center justify-center min-h-[120px]">
+                  <h4 className="text-lg font-bold text-center group-hover:text-cyan-400 transition-colors">{sponsor}</h4>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -863,6 +943,7 @@ export default function Home() {
               <div className="space-y-2 text-sm">
                 <a href="#" className="block text-gray-300 hover:text-white transition-colors">Home</a>
                 <a href="#tracks" className="block text-gray-300 hover:text-white transition-colors">Tracks</a>
+                <a href="#problems" className="block text-gray-300 hover:text-white transition-colors">Problems</a>
                 <a href="#gallery" className="block text-gray-300 hover:text-white transition-colors">Gallery</a>
                 <a href="#timeline" className="block text-gray-300 hover:text-white transition-colors">Timeline</a>
               </div>
